@@ -19,24 +19,12 @@ app.use(bodyParser.json());
 const mongoUri = process.env.MONGO_URL;
 
 // Connect to MongoDB
-mongoose.connect(mongoUri)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
-
-// Test route to verify database connection and query
-app.get('/api/test-db', async (req, res) => {
-  try {
-    // Replace 'your_collection_name' with the actual collection name you want to query
-    const result = await mongoose.connection.db.collection('capturetheflagDB').findOne({});
-    if (result) {
-      res.send(result);
-    } else {
-      res.send('No documents found in the collection.');
-    }
-  } catch (err) {
-    res.status(500).send('Error fetching data from database: ' + err.message);
-  }
-});
+mongoose.connect(mongoUri, { dbName: 'capturetheflagDB' })
+  .then(() => {
+    console.log('MongoDB connected');
+    console.log('Connected to Database:', mongoose.connection.name);
+  })
+  .catch(err => console.error('MongoDB connection error:', err)); 
 
 app.use('/api/auth', authRoutes);
 
