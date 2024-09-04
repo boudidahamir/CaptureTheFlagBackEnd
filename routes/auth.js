@@ -164,6 +164,42 @@ router.get('/player/:nickname', async (req, res) => {
     }
 });
 
+// API endpoint to update player stats after a match
+router.post('/updateStats', async (req, res) => {
+    const { winnerNickname, loserNickname } = req.body;
+
+    try {
+        // Update the winner's stats
+        const winner = await User.findOneAndUpdate(
+            { nickname: winnerNickname },
+            { $inc: { wins: 1 } },
+            { new: true }
+        );
+
+        if (!winner) {
+            return res.status(404).json({ error: 'Winner not found' });
+        }
+
+        // Update the loser's stats
+        const loser = await User.findOneAndUpdate(
+            { nickname: loserNickname },
+            { $inc: { losses: 1 } },
+            { new: true }
+        );
+
+        if (!loser) {
+            return res.status(404).json({ error: 'Loser not found' });
+        }
+
+        res.status(200).json({
+            winner: { nickname: winner.nickname, wins: winner.wins },
+            loser: { nickname: loser.nickname, losses: loser.losses }
+        });
+    } catch (error) {
+        console.error('Error updating player stats:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 
 
