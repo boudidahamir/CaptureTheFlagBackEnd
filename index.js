@@ -19,9 +19,10 @@ app.use(bodyParser.json());
 const mongoUri = process.env.MONGO_URL;
 
 // Connect to MongoDB
-mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongoUri)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
+
 
 
 app.use('/api/auth', authRoutes);
