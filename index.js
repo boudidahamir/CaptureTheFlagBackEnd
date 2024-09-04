@@ -15,13 +15,19 @@ app.use(cors({
 
 app.use(bodyParser.json());
 
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.log(err));
+// Get MongoDB connection string from environment variable
+const mongoUri = process.env.MONGODB_URI;
 
+// Connect to MongoDB
+mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
+
+// Use routes
 app.use('/api/auth', authRoutes);
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+// Start the server
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
