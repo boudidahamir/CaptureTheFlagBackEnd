@@ -15,7 +15,7 @@ app.use(cors({
 
 app.use(bodyParser.json());
 
-mongoose.connect('autorack.proxy.rlwy.net:25393/auth-system', {
+mongoose.connect('mongodb://mongo:iWQqHgILEfJaGXViYrkJMgpBgYKvHhhu@autorack.proxy.rlwy.net:25393/auth-system', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
