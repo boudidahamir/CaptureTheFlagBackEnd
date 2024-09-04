@@ -23,11 +23,9 @@ mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Use routes
+
 app.use('/api/auth', authRoutes);
 
-// Start the server
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Server running on port', process.env.PORT || 3000);
 });
