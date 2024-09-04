@@ -76,7 +76,7 @@ router.post('/recover', async (req, res) => {
             }
         });
         
-        const resetLink = `http://localhost:5000/resetpassword/${token}`; // Adjust the URL based on your environment
+        const resetLink = `https://capturetheflagfrontend-production.up.railway.app/resetpassword/${token}`; // Adjust the URL based on your environment
 
         const mailOptions = {
             to: email,
