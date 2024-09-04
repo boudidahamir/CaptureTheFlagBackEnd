@@ -16,7 +16,7 @@ app.use(cors({
 app.use(bodyParser.json());
 
 // Get MongoDB connection string from environment variable
-const mongoUri = process.env.MONGODB_URI;
+const mongoUri = process.env.MONGO_URL;
 
 // Connect to MongoDB
 mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
