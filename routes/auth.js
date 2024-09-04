@@ -148,7 +148,7 @@ router.get('/player/:nickname', async (req, res) => {
     const { nickname } = req.params;
 
     try {
-        const player = await Player.findOne({ nickname });
+        const player = await User.findOne({ nickname });
 
         if (player) {
             res.json({
