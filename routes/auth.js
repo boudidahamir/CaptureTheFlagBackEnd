@@ -144,7 +144,7 @@ router.post('/validate', async (req, res) => {
 });
 
 // API endpoint to get player stats by nickname
-app.get('/player/:nickname', async (req, res) => {
+router.get('/player/:nickname', async (req, res) => {
     const { nickname } = req.params;
 
     try {
