@@ -143,6 +143,33 @@ router.post('/validate', async (req, res) => {
     }
 });
 
+// API endpoint to get player stats by nickname
+app.get('/player/:nickname', async (req, res) => {
+    const { nickname } = req.params;
+
+    try {
+        const player = await Player.findOne({ nickname });
+
+        if (player) {
+            res.json({
+                wins: player.wins,
+                losses: player.losses,
+                ratio: player.losses > 0 ? player.wins / player.losses : player.wins
+            });
+        } else {
+            res.status(404).json({ error: 'Player not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Start the server
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+
 
 
 module.exports = router;
