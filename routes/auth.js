@@ -152,9 +152,9 @@ router.get('/player/:nickname', async (req, res) => {
 
         if (player) {
             res.json({
-                wins: player.wins,
-                losses: player.losses,
-                ratio: player.losses > 0 ? player.wins / player.losses : player.wins
+                wins: player.win,
+                losses: player.loss,
+                ratio: player.loss > 0 ? player.win / player.loss : player.win
             });
         } else {
             res.status(404).json({ error: 'Player not found' });
