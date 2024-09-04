@@ -8,14 +8,14 @@ const app = express();
 
 // Enable CORS for specific origin
 app.use(cors({
-  origin: 'http://localhost:5000', // Replace with your frontend's URL
+  origin: 'http://capturetheflagfrontend-production.up.railway.app', // Replace with your frontend's URL
   methods: ['GET', 'POST'],
   credentials: true
 }));
 
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27017/auth-system', {
+mongoose.connect('autorack.proxy.rlwy.net:25393/auth-system', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
