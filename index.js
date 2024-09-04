@@ -23,7 +23,20 @@ mongoose.connect(mongoUri)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-
+// Test route to verify database connection and query
+app.get('/api/test-db', async (req, res) => {
+  try {
+    // Replace 'your_collection_name' with the actual collection name you want to query
+    const result = await mongoose.connection.db.collection('capturetheflagDB').findOne({});
+    if (result) {
+      res.send(result);
+    } else {
+      res.send('No documents found in the collection.');
+    }
+  } catch (err) {
+    res.status(500).send('Error fetching data from database: ' + err.message);
+  }
+});
 
 app.use('/api/auth', authRoutes);
 
